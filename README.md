@@ -2,6 +2,8 @@
 
 HCCD is a small tool designed to allow the creation of a lot of game cards from a CSV (Excel) file using a few lines of HTML and CSS.
 
+**[Download it here](https://github.com/vaemendis/hccd/releases)**
+
 ![](http://vaemendis.github.io/external/hccd/hccd-diagram.png)
 
 For other card game creation tools (there are a lot of them), check [this list](https://boardgamegeek.com/thread/991506/resources-card-game-makers) on BoardGameGeek.
@@ -11,7 +13,7 @@ Here is how to use HCCD:
 - Download and unzip the [latest HCCD release ](https://github.com/vaemendis/hccd/releases) (the **hccd-binary.zip** file)  
 - Double click on **Hccd.jar** to launch the application (you need to have installed [Java](https://java.com/en/download/) first)  
 - Now, in HCCD, open the file `character.html` from `examples/example-full` (or just drag and drop it on the user interface).
-A new file (`character-GENERATED.html`, the cards contact sheet) has been generated. You just created your first set of cards.
+A new file (`character-GENERATED.html`, the cards contact sheet) has been generated. You just created your first set of cards. (here is an [online example](http://vaemendis.github.io/external/hccd/character-GENERATED.html))
 - You can now edit the card layout and description files (the contact sheet is automatically updated):
   - `character.html`
   - `character.css`
