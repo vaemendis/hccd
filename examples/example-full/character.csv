@@ -1,0 +1,21 @@
+avatar;name;defense;attack;health;insanity;move;text
+alien-stare.png;Alien;1;1;4;9;1;Lorem ipsum dolor sit amet, consectetur adipiscing elit
+barbarian.png;Barbarian;7;2;6;8;2;sed do eiusmod tempor incididunt ut labore et dolore magna
+blindfold.png;Blind Man;9;8;5;1;4;aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+cowled.png;Pythia;2;6;3;2;2;ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+dead-head.png;Dead Man;1;3;6;6;1;sint occaecat cupidatat
+dwarf-face.png;Viking;5;5;5;9;3;proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+gluttony.png;Hungry Blob;3;7;6;1;2;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium , totam explicabo. Nemo enim ipsam voluptatem voluptas sit
+idea.png;Smartbot;6;8;3;3;6;aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem quia dolor sit amet, consectetur, adipisci velit, sed quia non
+iron-mask.png;Masked Man;4;9;9;2;3;ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+lizardman.png;Angry Monster;8;1;8;1;2;sint occaecat cupidatat
+ninja-mask.png;Ninja;5;2;2;1;1;proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+one-eyed.png;One-Eye;7;3;1;1;6;Lorem ipsum dolor sit amet, consectetur adipiscing elit
+overlord-helm.png;Nazgul;2;6;3;3;8;sed do eiusmod tempor incididunt ut labore et dolore magna
+police-officer-head.png;Policeman;6;5;7;2;2;aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+pumpkin-mask.png;Halloween Pumpkin;5;7;3;3;1;aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+silenced.png;Silent;9;9;6;3;4;ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+snake-bite.png;Snake;8;1;1;2;5;sint occaecat cupidatat
+tear-tracks.png;Crying Man;7;2;2;1;2;proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+wolf-head.png;Wolf;1;7;9;3;3;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium , totam explicabo. Nemo enim ipsam voluptatem voluptas sit
+woman-elf-face.png;Elf;2;5;8;2;2;sint occaecat cupidatat

@@ -1,0 +1,60 @@
+.card {
+    margin: 0.5mm;
+    border-style: solid;
+    border-width: 0.8mm;
+    border-color: black;
+    border-radius: 3mm;
+    width: 63mm;
+    height: 88mm;
+}
+
+.avatar {
+    float: left;
+    margin: 1.1mm;
+    width: 24mm;
+    height: 24mm;
+}
+
+.name {
+    margin-top: 2mm;
+    margin-right: 1mm;
+    margin-left: 1mm;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 16pt;
+    height: 10mm;
+}
+
+.icon {
+    width: 7mm;
+    height: 7mm;
+    vertical-align: text-bottom;
+    margin: 1mm;
+}
+
+.iconcell {
+    padding: 0.5mm;
+    margin-right: 1mm;
+}
+
+.carac {
+    float: right;
+    margin: 3mm;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.text {
+    float:left;
+    font-family: "Arial";
+    font-size: 11pt;    
+    margin-left: 1.5mm;
+    margin-right: 1.5mm;
+    margin-top: 5mm;
+    padding: 2mm;
+    background-color: #EEEEEE;
+    border-radius: 3mm;
+    height: 51mm;
+    width: 34mm;
+}

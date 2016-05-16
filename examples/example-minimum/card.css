@@ -1,0 +1,10 @@
+.card {
+    margin: 0.5mm;
+    border-style: solid;
+    border-width: 0.8mm;
+    border-color: black;
+    border-radius: 3mm;
+    width: 63mm;
+    height: 88mm;
+}
+
