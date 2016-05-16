@@ -5,16 +5,29 @@ import javax.swing.border.BevelBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.prefs.Preferences;
 
-public class MainForm extends JFrame implements UserConfiguration{
+public class MainForm extends JFrame implements UserConfiguration {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    private static final String PREF_NODE_NAME = "net.vaemendis.hccd.GUI_PREFERENCES";
+    private static final String PREF_ROWS = "rows";
+    private static final String PREF_COLS = "columns";
+    private static final String PREF_EXCEL_CSV = "csv_excel";
+    private static final String PREF_DELIMITER = "delimiter";
+    private static final String PREF_CARD_FILTER = "card_filter";
+    private static final String PREF_WATCHED_FILE = "watched_file";
+
+
+    private Preferences prefs;
 
     private JTextArea logPanel;
     private FileWatcher watcher;
@@ -24,12 +37,13 @@ public class MainForm extends JFrame implements UserConfiguration{
     private final String[] delimiters = {";", ","};
     private final JComboBox<String> delimiterBox;
     private final JTextField cardFilter;
-
+    private String watchedFilePath;
 
 
     public MainForm(FileWatcher watcher) {
         this.watcher = watcher;
         this.watcher.setConfiguration(this);
+        prefs = Preferences.userRoot().node(PREF_NODE_NAME);
 
         setResizable(false);
         getContentPane().setLayout(new BorderLayout());
@@ -135,6 +149,7 @@ public class MainForm extends JFrame implements UserConfiguration{
                 if (file.isFile() && isHtml(file)) {
                     try {
                         watcher.watch(file);
+                        watchedFilePath = file.getPath();
                     } catch (Exception e) {
                         ErrorDialog.show(MainForm.this, e);
                     }
@@ -149,7 +164,13 @@ public class MainForm extends JFrame implements UserConfiguration{
             }
         });
 
-
+        // save preferences on exit
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                savePreferences();
+            }
+        });
     }
 
     public void init() throws IOException {
@@ -161,6 +182,7 @@ public class MainForm extends JFrame implements UserConfiguration{
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
         setLocation((screenWidth - getWidth()) / 2, (screenHeight - getHeight()) / 2);
+        loadPreferences();
     }
 
     public void openFile() throws IOException {
@@ -181,6 +203,7 @@ public class MainForm extends JFrame implements UserConfiguration{
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File chosenFile = chooser.getSelectedFile();
             watcher.watch(chosenFile);
+            watchedFilePath = chosenFile.getPath();
         }
     }
 
@@ -209,7 +232,7 @@ public class MainForm extends JFrame implements UserConfiguration{
     }
 
     @Override
-    public char getDelimiter(){
+    public char getDelimiter() {
         return ((String) delimiterBox.getSelectedItem()).charAt(0);
     }
 
@@ -240,4 +263,43 @@ public class MainForm extends JFrame implements UserConfiguration{
 
         return cardList;
     }
+
+    private void savePreferences() {
+        prefs.putInt(PREF_ROWS, getGridRowNumber());
+        prefs.putInt(PREF_COLS, getGridColNumber());
+        prefs.putBoolean(PREF_EXCEL_CSV, useExcelFormat());
+        prefs.put(PREF_DELIMITER, String.valueOf(getDelimiter()));
+        prefs.put(PREF_CARD_FILTER, cardFilter.getText());
+        prefs.put(PREF_WATCHED_FILE, watchedFilePath);
+    }
+
+    private void loadPreferences() {
+        rowSpinner.setValue(prefs.getInt(PREF_ROWS, 2));
+        colSpinner.setValue(prefs.getInt(PREF_COLS, 4));
+        if (prefs.getBoolean(PREF_EXCEL_CSV, false)) {
+            excelRadio.setSelected(true);
+        } else {
+            excelRadio.setSelected(false);
+        }
+        delimiterBox.setSelectedItem(prefs.get(PREF_DELIMITER, ";"));
+        cardFilter.setText(prefs.get(PREF_CARD_FILTER, ""));
+        watchedFilePath = prefs.get(PREF_WATCHED_FILE, null);
+
+        boolean restored = false;
+        if (watchedFilePath != null) {
+            File wf = new File(watchedFilePath);
+            if (wf.isFile()) {
+                try {
+                    watcher.watch(wf);
+                    restored = true;
+                } catch (Exception e) {
+                    log("Error while trying to monitor file: " + wf.getPath());
+                }
+            }
+        }
+        if(!restored){
+            log("Open your HTML file or drag and drop it here");
+        }
+    }
 }
+
