@@ -1,6 +1,6 @@
 # HCCD - HTML+CSS Card Designer
 
-HCCD is a small tool designed to allow the creation of a lot of game cards from a CSV (Excel) file using a few lines of HTML and CSS.
+HCCD is a small tool designed to automate the creation of game cards from a CSV (Excel) file using a few lines of HTML and CSS.
 
 **[Download it here](https://github.com/vaemendis/hccd/releases)**
 
