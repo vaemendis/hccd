@@ -8,7 +8,7 @@ HCCD is a small tool designed to automate the creation of game cards from a CSV 
 
 For other card game creation tools (there are a lot of them), check [this list](https://boardgamegeek.com/thread/991506/resources-card-game-makers) on BoardGameGeek.
 
-#30 seconds example
+# 30 seconds example
 Here is how to use HCCD:
 - Download and unzip the [latest HCCD release ](https://github.com/vaemendis/hccd/releases) (the **hccd-binary.zip** file)  
 - Double click on **Hccd.jar** to launch the application (you need to have installed [Java](https://java.com/en/download/) first)  
@@ -19,7 +19,7 @@ A new file (`character-GENERATED.html`, the cards contact sheet) has been genera
   - `character.css`
   - `character.csv`
  
-#How it works
+# How it works
 
 To build the card contact sheet, HCCD uses three files and as many image as you need:
 - **the HTML file**: contains the layout for a single type card, with variables declared using mustaches (e.g. `{{myVariable}}`). The custom code has to be declared in the `div` with the `card` class (see the HTML file in  `examples/example-minimum`)
@@ -33,7 +33,7 @@ When you open your HTML file, HCCD will monitor it, as well as the two other fil
 
 So once your HTML file is opened, just forget about HCCD and work on your files !
 
-##Settings
+## Settings
 
 Settings are modified in the interface.
 
@@ -55,7 +55,7 @@ Usefull when you want to reprint only a part of your cards. Choose the card to p
 Only usefull to apply new settings, as file modifications are automatically detected anyway.
 
 
-#Useful tips
+# Useful tips
 
 - Don't forget to use `mm` and `pt` instead of `px` in your CSS.
 - You don't need to hit the "Refresh" button each time you modify one of your description files (html, css, csv), HCCD monitors them and the contact sheet will be regenerated automatically.
@@ -64,11 +64,11 @@ Only usefull to apply new settings, as file modifications are automatically dete
 - When printing the contact sheet using your browser, don't forget to adapt settings so that the page is printed at 100% of its size, with background images but any without margin or header.
 - If you get `[NOT FOUND]` on your cards instead of the text you had put into your CSV file, check that the delimiter and the CSV file type are correctly set in the interface.
 
-##License
+## License
 HCCD is licensed under GPL V3.
 
 HCCD uses icons from [game-icons.net](http://game-icons.net/) and the [JarClassLoader](http://www.jdotsoft.com/JarClassLoader.php) from JDotSoft.
 
-##Disclaimer
+## Disclaimer
 
 As you might have gathered from the ugly user interface, the ugly code and the lack of unit tests, HCCD is a small, quickly put together tool made to meet my specific needs. It is not meant to evolve, except for a few bug fixes if need be.
