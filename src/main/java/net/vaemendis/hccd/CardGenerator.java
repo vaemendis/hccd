@@ -104,7 +104,7 @@ public class CardGenerator {
                 "}\n" +
                 "\n" +
                 "table.page td {\n" +
-                "    padding: 0;" +
+                "    padding: 0;\n" +
                 "}\n" +
                 "</style>\n</head><body>");
     }
