@@ -94,11 +94,17 @@ public class CardGenerator {
                 "    margin: 10mm;\n" +
                 "}\n" +
                 "\n" +
-                ".page {\n" +
+                "table.page {\n" +
                 "    border: 0mm;\n" +
                 "    page-break-after: always;    \n" +
+                "    border-spacing: 0;\n" +
+                "    border-collapse: collapse;\n" +
                 "    display:block;        \n" +
                 "    clear: both;\n" +
+                "}\n" +
+                "\n" +
+                "table.page td {\n" +
+                "    padding: 0;\n" +
                 "}\n" +
                 "</style>\n</head><body>");
     }
