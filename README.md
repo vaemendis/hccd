@@ -72,3 +72,16 @@ HCCD uses icons from [game-icons.net](http://game-icons.net/) and the [JarClassL
 ## Disclaimer
 
 As you might have gathered from the ugly user interface, the ugly code and the lack of unit tests, HCCD is a small, quickly put together tool made to meet my specific needs. It is not meant to evolve, except for a few bug fixes if need be.
+
+## Alternatives
+
+- A long list of resources for card game making is available on the **BoardGameGeek forum**:  
+https://boardgamegeek.com/thread/991506/resources-card-game-makers/page/1
+
+- **PyCard**, Python card maker inspired by Hccd:  
+ https://github.com/ghostsquad/pycard
+
+- **CardPen** is a web oriented card maker, also in the same family (HTML+CSS) as Hccd and PyCard:  
+http://cardpen.mcdemarco.net/doc/index.html
+
+

@@ -59,7 +59,7 @@ public class CardGenerator {
                 while (recordIter.hasNext()) {
                     sb.append("<table class=\"page\">");
                     for (int i = 0; i < rows; i++) {
-                        sb.append("<ht>");
+                        sb.append("<tr>");
                         for (int j = 0; j < cols; j++) {
                             if (recordIter.hasNext()) {
                                 sb.append("<td>");
