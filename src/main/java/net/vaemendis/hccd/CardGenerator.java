@@ -10,11 +10,18 @@ import org.apache.commons.io.input.BOMInputStream;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class CardGenerator {
 
@@ -62,8 +69,14 @@ public class CardGenerator {
                         sb.append("<tr>");
                         for (int j = 0; j < cols; j++) {
                             if (recordIter.hasNext()) {
+                                HashMap<String, Object> result = new HashMap<>();
+                                for (Map.Entry<String, String> e : recordIter.next().toMap().entrySet())
+                                    result.put(
+                                            e.getKey(),
+                                            e.getValue().isEmpty() ? false : e.getValue());
+
                                 sb.append("<td>");
-                                sb.append(template.execute(recordIter.next().toMap()));
+                                sb.append(template.execute(result));
                                 sb.append("</td>");
                             } else {
                                 sb.append("</tr></table>");
