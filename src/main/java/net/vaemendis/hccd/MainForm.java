@@ -317,7 +317,7 @@ public class MainForm extends JFrame implements UserConfiguration {
             excelRadio.setSelected(false);
         }
         delimiterBox.setSelectedItem(prefs.get(PREF_DELIMITER, ";"));
-        falseBox.setSelectedItem(FalseValue.valueOf(prefs.get(PREF_FALSE_VALUE, "NONE")));
+        falseBox.setSelectedItem(FalseValue.valueOf(prefs.get(PREF_FALSE_VALUE, FalseValue.NONE.name())));
         cardFilter.setText(prefs.get(PREF_CARD_FILTER, ""));
         watchedFilePath = prefs.get(PREF_WATCHED_FILE, null);
 
