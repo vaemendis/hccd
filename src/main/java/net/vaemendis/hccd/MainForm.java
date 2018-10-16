@@ -1,10 +1,30 @@
 package net.vaemendis.hccd;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -23,6 +43,7 @@ public class MainForm extends JFrame implements UserConfiguration {
     private static final String PREF_COLS = "columns";
     private static final String PREF_EXCEL_CSV = "csv_excel";
     private static final String PREF_DELIMITER = "delimiter";
+    private static final String PREF_FALSE_VALUE = "false_value";
     private static final String PREF_CARD_FILTER = "card_filter";
     private static final String PREF_WATCHED_FILE = "watched_file";
 
@@ -36,6 +57,7 @@ public class MainForm extends JFrame implements UserConfiguration {
     private final JSpinner colSpinner;
     private final String[] delimiters = {";", ","};
     private final JComboBox<String> delimiterBox;
+    private final JComboBox<FalseValue> falseBox;
     private final JTextField cardFilter;
     private String watchedFilePath;
 
@@ -81,7 +103,11 @@ public class MainForm extends JFrame implements UserConfiguration {
         JLabel delimiterLbl = new JLabel("Delimiter: ");
         delimiterBox = new JComboBox<>(delimiters);
         delimiterBox.setSelectedIndex(0);
-        delimiterBox.setMaximumSize(new Dimension(40, 50));
+        // delimiterBox.setMaximumSize(new Dimension(50, 50));
+
+        JLabel falseLbl = new JLabel("False string: ");
+        falseBox = new JComboBox<>(FalseValue.values());
+        falseBox.setSelectedIndex(0);
 
         JButton refreshBtn = new JButton("Refresh");
         refreshBtn.addActionListener(e -> {
@@ -121,13 +147,16 @@ public class MainForm extends JFrame implements UserConfiguration {
         topPanel.add(Box.createHorizontalStrut(10));
         topPanel.add(colLbl);
         topPanel.add(colSpinner);
-        topPanel.add(Box.createHorizontalStrut(30));
+        topPanel.add(Box.createHorizontalStrut(10));
         topPanel.add(formatLabel);
         topPanel.add(rfcRadio);
         topPanel.add(excelRadio);
-        topPanel.add(Box.createHorizontalStrut(30));
+        topPanel.add(Box.createHorizontalStrut(10));
         topPanel.add(delimiterLbl);
         topPanel.add(delimiterBox);
+        topPanel.add(Box.createHorizontalStrut(10));
+        topPanel.add(falseLbl);
+        topPanel.add(falseBox);
 
 
         topPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -264,11 +293,17 @@ public class MainForm extends JFrame implements UserConfiguration {
         return cardList;
     }
 
+    @Override
+    public FalseValue getFalseValue() {
+        return (FalseValue) falseBox.getSelectedItem();
+    }
+
     private void savePreferences() {
         prefs.putInt(PREF_ROWS, getGridRowNumber());
         prefs.putInt(PREF_COLS, getGridColNumber());
         prefs.putBoolean(PREF_EXCEL_CSV, useExcelFormat());
         prefs.put(PREF_DELIMITER, String.valueOf(getDelimiter()));
+        prefs.put(PREF_FALSE_VALUE, getFalseValue().name());
         prefs.put(PREF_CARD_FILTER, cardFilter.getText());
         prefs.put(PREF_WATCHED_FILE, watchedFilePath);
     }
@@ -282,6 +317,7 @@ public class MainForm extends JFrame implements UserConfiguration {
             excelRadio.setSelected(false);
         }
         delimiterBox.setSelectedItem(prefs.get(PREF_DELIMITER, ";"));
+        falseBox.setSelectedItem(FalseValue.valueOf(prefs.get(PREF_FALSE_VALUE, "NONE")));
         cardFilter.setText(prefs.get(PREF_CARD_FILTER, ""));
         watchedFilePath = prefs.get(PREF_WATCHED_FILE, null);
 
@@ -297,7 +333,7 @@ public class MainForm extends JFrame implements UserConfiguration {
                 }
             }
         }
-        if(!restored){
+        if (!restored) {
             log("Open your HTML file or drag and drop it here");
         }
     }

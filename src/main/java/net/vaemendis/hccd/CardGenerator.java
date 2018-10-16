@@ -53,7 +53,6 @@ public class CardGenerator {
             }
 
 
-
             StringBuilder sb = new StringBuilder();
             writeHeader(sb, projectFiles.getCssFile().getName());
 
@@ -69,14 +68,23 @@ public class CardGenerator {
                         sb.append("<tr>");
                         for (int j = 0; j < cols; j++) {
                             if (recordIter.hasNext()) {
-                                HashMap<String, Object> result = new HashMap<>();
-                                for (Map.Entry<String, String> e : recordIter.next().toMap().entrySet())
-                                    result.put(
-                                            e.getKey(),
-                                            e.getValue().isEmpty() ? false : e.getValue());
+                                Map<String, String> map = recordIter.next().toMap();
+                                FalseValue falseValue = config.getFalseValue();
+                                String cardStr;
+
+                                if (falseValue == null || falseValue.value == null)
+                                    cardStr = template.execute(map);
+                                else {
+                                    Map<String, Object> result = new HashMap<>();
+                                    for (Map.Entry<String, String> e : map.entrySet())
+                                        result.put(
+                                                e.getKey(),
+                                                e.getValue().equals(falseValue.value) ? false : e.getValue());
+                                    cardStr = template.execute(result);
+                                }
 
                                 sb.append("<td>");
-                                sb.append(template.execute(result));
+                                sb.append(cardStr);
                                 sb.append("</td>");
                             } else {
                                 sb.append("</tr></table>");
@@ -131,14 +139,14 @@ public class CardGenerator {
         List<CSVRecord> recordList = new ArrayList<>();
         Iterable<CSVRecord> records;
         if (config.useExcelFormat()) {
-            try(Reader reader = new InputStreamReader(new BOMInputStream(new FileInputStream(csvFile)), StandardCharsets.UTF_8)){
+            try (Reader reader = new InputStreamReader(new BOMInputStream(new FileInputStream(csvFile)), StandardCharsets.UTF_8)) {
                 records = CSVFormat.EXCEL.withDelimiter(config.getDelimiter()).withFirstRecordAsHeader().parse(reader);
                 for (CSVRecord record : records) {
                     recordList.add(record);
                 }
             }
-        }else{
-            try (Reader in = new FileReader(csvFile)){
+        } else {
+            try (Reader in = new FileReader(csvFile)) {
                 records = CSVFormat.RFC4180.withDelimiter(config.getDelimiter()).withFirstRecordAsHeader().parse(in);
                 for (CSVRecord record : records) {
                     recordList.add(record);

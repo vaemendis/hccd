@@ -13,4 +13,6 @@ public interface UserConfiguration {
     char getDelimiter();
 
     List<Integer> getCardFilter();
+
+    FalseValue getFalseValue();
 }
