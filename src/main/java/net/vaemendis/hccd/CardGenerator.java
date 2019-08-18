@@ -10,11 +10,18 @@ import org.apache.commons.io.input.BOMInputStream;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class CardGenerator {
 
@@ -46,7 +53,6 @@ public class CardGenerator {
             }
 
 
-
             StringBuilder sb = new StringBuilder();
             writeHeader(sb, projectFiles.getCssFile().getName());
 
@@ -62,8 +68,23 @@ public class CardGenerator {
                         sb.append("<tr>");
                         for (int j = 0; j < cols; j++) {
                             if (recordIter.hasNext()) {
+                                Map<String, String> map = recordIter.next().toMap();
+                                FalseValue falseValue = config.getFalseValue();
+                                String cardStr;
+
+                                if (falseValue == null || falseValue.value == null)
+                                    cardStr = template.execute(map);
+                                else {
+                                    Map<String, Object> result = new HashMap<>();
+                                    for (Map.Entry<String, String> e : map.entrySet())
+                                        result.put(
+                                                e.getKey(),
+                                                e.getValue().equals(falseValue.value) ? false : e.getValue());
+                                    cardStr = template.execute(result);
+                                }
+
                                 sb.append("<td>");
-                                sb.append(template.execute(recordIter.next().toMap()));
+                                sb.append(cardStr);
                                 sb.append("</td>");
                             } else {
                                 sb.append("</tr></table>");
@@ -121,14 +142,14 @@ public class CardGenerator {
         List<CSVRecord> recordList = new ArrayList<>();
         Iterable<CSVRecord> records;
         if (config.useExcelFormat()) {
-            try(Reader reader = new InputStreamReader(new BOMInputStream(new FileInputStream(csvFile)), StandardCharsets.UTF_8)){
+            try (Reader reader = new InputStreamReader(new BOMInputStream(new FileInputStream(csvFile)), StandardCharsets.UTF_8)) {
                 records = CSVFormat.EXCEL.withDelimiter(config.getDelimiter()).withFirstRecordAsHeader().parse(reader);
                 for (CSVRecord record : records) {
                     recordList.add(record);
                 }
             }
-        }else{
-            try (Reader in = new FileReader(csvFile)){
+        } else {
+            try (Reader in = new FileReader(csvFile)) {
                 records = CSVFormat.RFC4180.withDelimiter(config.getDelimiter()).withFirstRecordAsHeader().parse(in);
                 for (CSVRecord record : records) {
                     recordList.add(record);
