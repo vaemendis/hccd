@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <link rel="stylesheet" type="text/css" href="unit.css">
+</head>
+
+<body>
+    <div class="card" style="border-color:{{couleur}};">
+        <div class="type" style="background-color:{{couleur}};">{{type}}
+          <div class="out_circle">
+              <div class="in_circle" style="background-color:{{couleur}};"">
+                <img class="avatar" src="{{avatar}}"></img>
+              </div>
+          </div>
+        </div>
+        <div class="name">{{name}}</div>
+
+        <div class="rest">
+        <div class="description">
+            {{desc}}
+            <div class="capacity">
+              <img class="button" src="{{button}}.png"></img>
+              {{option1}}
+            </div>
+            <div class="capacity">
+              <img class="button" src="empty.png"></img>
+              {{option2}}
+            </div>
+            <div class="capacity">
+              <img class="button" src="empty.png"></img>
+              {{option3}}
+            </div>
+        </div>
+
+        <table class="mine" {{health_bar}}>
+          <tr class="mine">
+            <th class="mine">0</th>
+            <th class="mine">+1</th>
+            <th class="mine">+2</th>
+            <th class="mine">+3</th>
+            <th class="mine">+4</th>
+            <th class="mine">+5</th>
+          </tr>
+        </table>
+      </div>
+
+        <!-- YOUR CUSTOM CODE ENDS HERE -->
+    </div>
+</body>
+
+</html>
