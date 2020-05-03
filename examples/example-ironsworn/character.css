@@ -1,0 +1,114 @@
+.card {
+    margin: 0mm;
+    border-style: solid;
+    border-width: 1.5mm;
+    width: 63mm;
+    height: 88mm;
+}
+
+.type {
+  font-family: "Arial";
+  font-weight: bold;
+  font-size: 16pt;
+  height: 8mm;
+  color: white;
+}
+
+.out_circle
+{
+  position: relative;
+  top: -7mm; left: 45mm;
+  border-radius: 50%;
+  width: 15mm;
+  height: 15mm;
+  background-color: white;
+}
+
+.in_circle
+{
+    border-radius: 50%;
+    position: relative;
+    top: 0.5mm; left: 0.5mm;
+    width: 14mm;
+    height: 14mm;
+}
+
+.avatar {
+    position: relative;
+    top: 1mm; left: 1mm;
+    margin: 2mm
+    width: 12mm;
+    height: 12mm;
+}
+
+.name {
+    margin-top: 0mm;
+    margin-right: 1mm;
+    margin-left: 1mm;
+    font-family: "NotesEsa";
+    font-weight: bold;
+    font-size: 16pt;
+    height: 10mm;
+}
+
+.icon {
+    width: 7mm;
+    height: 7mm;
+    vertical-align: text-bottom;
+    margin: 1mm;
+}
+
+.iconcell {
+    padding: 0.5mm;
+    margin-right: 1mm;
+}
+
+.carac {
+    float: right;
+    margin: 3mm;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.rest{
+    width=56mm;
+    height: 69mm;
+    display: flex;
+    flex-flow: column;
+}
+
+.description {
+    float:left;
+    font-family: "Arial";
+    font-size: 9pt;
+    margin-top: -2mm;
+    margin-left: 1.5mm;
+    margin-right: 1.5mm;
+    padding: 2mm;
+    background-color: #EEEEEE;
+    border-radius: 3mm;
+    width: 56mm;
+    height:100%
+
+}
+
+table.mine {
+  margin-left: 5%;
+  margin-top: 1mm;
+  border-collapse: collapse;
+  width: 90%
+
+}
+
+td.mine, th.mine {
+  border: 1px solid black;
+  width: 16%
+}
+
+.button {
+  position: relative;
+  margin: 2mm
+  width: 2mm;
+  height: 2mm;
+}
