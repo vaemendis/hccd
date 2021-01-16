@@ -20,6 +20,8 @@ public class CardGenerator {
 
     private static final String GENERATED_SUFFIX = "-GENERATED";
 
+    private static final String ENCODING = "UTF-8";
+
     public static void generateCards(WatchedFiles projectFiles, UserConfiguration config) throws IOException {
         Hccd.log("Generating card sheet file...");
         if (!projectFiles.getCsvFile().isFile()) {
@@ -77,7 +79,7 @@ public class CardGenerator {
             }
             writeFooter(sb);
 
-            FileUtils.writeStringToFile(target, sb.toString());
+            FileUtils.writeStringToFile(target, sb.toString(), ENCODING);
             Hccd.log("Card sheet file written to " + target.getPath());
         }
     }
@@ -86,7 +88,7 @@ public class CardGenerator {
         sb.append("<!doctype html>" +
                 "<html>" +
                 "<head>" +
-                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></meta>" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset="+ENCODING+"\"></meta>" +
 				"<meta http-equiv=\"Content-Security-Policy\" content=\"script-src 'unsafe-inline';\">" +
 				"<meta http-equiv=\"X-Content-Security-Policy\" content=\"script-src 'unsafe-inline';\">" + 
 				"<meta http-equiv=\"X-WebKit-CSP\" content=\"script-src 'unsafe-inline';\">" +
